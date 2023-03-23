@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NewTodo from "./components/NewTodo";
+import Todos from "./components/Todos";
+import TodosContextProvider from "./store/todos-context";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodosContextProvider>
+      <NewTodo />
+      <Todos />
+    </TodosContextProvider>
   );
 }
 
 export default App;
+
+
+
+// import React, { useState } from "react";
+
+// import Todo from "../models/todo";
+
+// type TodosContextObj = {
+//   items: Todo[];
+//   addTodo: (text: string) => void;
+//   removeTodo: (id: string) => void;
+// };
+
+// export const TodosContext = React.createContext<TodosContextObj>({
+//   items: [],
+//   addTodo: () => {},
+//   removeTodo: (id: string) => {},
+// });
+
+// const TodosContextProvider: React.FC<{
+//   children?: React.ReactNode;
+// }> = (props) => {
+//   const [todos, setTodos] = useState<Todo[]>([]);
+
+//   const addTodoHandler = (todoText: string) => {
+//     const newTodo = new Todo(todoText);
+
+//     setTodos((prevTodos) => {
+//       return prevTodos.concat(newTodo);
+//     });
+//   };
+
+//   const removeTodoHandler = (todoId: string) => {
+//     setTodos((prevTodos) => {
+//       return prevTodos.filter((todo) => todo.id !== todoId);
+//     });
+//   };
+
+//   const contextValue: TodosContextObj = {
+//     items: todos,
+//     addTodo: addTodoHandler,
+//     removeTodo: removeTodoHandler,
+//   };
+
+//   return (
+//     <TodosContext.Provider value={contextValue}>
+//       {props.children}
+//     </TodosContext.Provider>
+//   );
+// };
+
+// export default TodosContextProvider;
